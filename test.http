@@ -1,0 +1,50 @@
+@protocol= http
+@domainname= localhost
+@port= {{$dotenv PORT}}
+@path=v1
+@baseUrl = {{protocol}}://{{domainname}}:{{port}}/{{path}}
+
+### Route GET /quiz
+
+GET {{baseUrl}}/quizzes
+
+### Route GET /quiz/:id
+
+GET {{baseUrl}}/quiz/1
+
+### Route GET quiz/category/:id
+
+GET {{baseUrl}}/quiz/category/1
+
+### Route PATCH quiz/category/:id
+
+PATCH {{baseUrl}}/quiz/1
+Content-type: application/json
+
+{
+    "title": "Bitcoin, a t'elle la même valeur sur Alpha du Centaure ?"
+}
+
+### Route PATCH /quiz
+
+POST {{baseUrl}}/quiz/
+Content-type: application/json
+
+{
+    "title": "Bitcoin, Paco Rabanne l'avait prédit, le retour !",
+    "categoryId": 2
+}
+
+### Route DELETE /quiz
+
+DELETE {{baseUrl}}/quiz/15
+
+### Route GET /articles
+
+GET {{baseUrl}}/articles
+
+### Route GET /articles/:id
+
+GET {{baseUrl}}/articles/1
+
+###

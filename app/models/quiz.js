@@ -4,7 +4,7 @@ const db = require('../database.js');
 class Quiz {
     id;
     title;
-    category_id;
+    categoryId;
 
     set category_id(val) {
         this.categoryId = val;
@@ -38,10 +38,27 @@ class Quiz {
         JOIN category ON category.id = quiz.category_id
         JOIN question ON quiz.id = question.quiz_id
         JOIN answer ON question.id = answer.question_id
-        JOIN article ON article.id = question.article_id
         WHERE category.id = $1;`, [id]);
 
         return new Quiz(rows[0]);
+    }
+
+    // pas statique car propre à chaque instance
+    async modifyQuiz() {
+        const { rows } = await db.query(`UPDATE quiz SET title = $2, category_id = $3
+        WHERE id = $1;`, [this.id, this.title, this.categoryId]);
+    }
+
+    async save() {
+        // props de this => insérer une ligne dans la bdd
+        const { rows } = await db.query(`INSERT INTO quiz (title, category_id)
+        VALUES ($1, $2) RETURNING id;`, [this.title, this.categoryId]);
+
+        this.id = rows[0].id;
+    }
+
+    async delete() {
+        const { rows } = await db.query(`DELETE FROM quiz WHERE id = $1;`, [this.id]);
     }
 
 }

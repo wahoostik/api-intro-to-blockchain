@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS "quiz" (
 CREATE TABLE IF NOT EXISTS "user_has_quiz" (
   "id" int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   "scorequiz" int,
-  "doOrNot" boolean NOT NULL,
+  "do_or_not" boolean NOT NULL,
   "user_id" int NOT NULL REFERENCES "user"("id"),
   "quiz_id" int NOT NULL REFERENCES "quiz"("id")
 );
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS "question" (
 CREATE TABLE IF NOT EXISTS "answer" (
   "id" int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   "name" text NOT NULL,
-  "rightOrWrong" boolean NOT NULL,
+  "right_or_wrong" boolean NOT NULL,
   "question_id" int NOT NULL REFERENCES "question" ("id")
 );
 
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS "answer" (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS "user_has_question" (
   "id" int GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "readOrNot" boolean NOT NULL,
+  "read_or_not" boolean NOT NULL,
   "user_id" int NOT NULL REFERENCES "user"("id"),
   "question_id" int NOT NULL REFERENCES "question"("id")
 );

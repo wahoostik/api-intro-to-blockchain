@@ -1,10 +1,10 @@
 const { request } = require('express');
-const Article = require('../models/article');
+const Question = require('../models/question');
 
-const articleController = {
+const questionController = {
     allArticles : async (request, response) => {
         try {
-            const article = await Article.findAllArticle();
+            const article = await Question.findAllArticle();
             response.json(article);
         } catch (error) {
             response.status(404).json(error.message);
@@ -14,7 +14,9 @@ const articleController = {
 
     findOneArticle : async (request, response) => {
         try {
-            const theArticle = await Article.findOneArticle();
+            const id = parseInt(request.params.id, 10);
+            const theArticle = await Question.findOneArticle(id);
+            
             response.json(theArticle);
         } catch (error) {
             response.status(404).json(error.message);
@@ -24,4 +26,4 @@ const articleController = {
 
 };
 
-module.exports = articleController;
+module.exports = questionController;
