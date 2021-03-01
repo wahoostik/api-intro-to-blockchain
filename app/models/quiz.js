@@ -1,5 +1,5 @@
 // Modèle Active Record
-const db = require('../database');
+const db = require('../database.js');
 
 class Quiz {
     id;
@@ -26,8 +26,7 @@ class Quiz {
     static async findOneQuiz(id) {
         const { rows } = await db.query(`SELECT * FROM quiz
         JOIN question ON quiz.id = question.quiz_id
-        JOIN answer ON question.id = answer.question_id
-        JOIN article ON article.id = question.article_id
+		JOIN answer ON question.id = answer.question_id
         WHERE quiz.id = $1;`, [id]);
 
         return new Quiz(rows[0]);

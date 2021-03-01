@@ -1,5 +1,5 @@
 // Modèle Active Record
-const db = require('../database');
+const db = require('../database.js');
 
 class Article {
     id;
