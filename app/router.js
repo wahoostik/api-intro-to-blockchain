@@ -6,7 +6,9 @@ const articleController = require('./controllers/articleController');
 const router = Router();
 
 // Page d'accueil
-router.get('/');
+router.get('/', (req, res) => {
+    res.send('hello');
+  });
 
 // Pages quiz
 router.get('/quizzes', quizController.allQuiz);
